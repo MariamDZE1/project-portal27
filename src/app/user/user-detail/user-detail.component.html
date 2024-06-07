@@ -1,0 +1,16 @@
+<div class="container" *ngIf="!isLoading">
+  <h2>User Detail</h2>
+  <div class="mat-elevation-z8">
+    <form (ngSubmit)="onSave()">
+      <div class="full-width">
+        <label>Username</label>
+        <input [(ngModel)]="user.username" name="username" required>
+      </div>
+      <div class="full-width">
+        <label>Email</label>
+        <input [(ngModel)]="user.email" name="email" required>
+      </div>
+      <button type="submit">Save</button>
+    </form>
+  </div>
+</div>

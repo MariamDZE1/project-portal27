@@ -1,0 +1,43 @@
+.navbar-brand {
+  font-size: 1.5rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.navbar-nav .nav-link {
+  font-size: 1.2rem;
+}
+
+@media (max-width: 768px) {
+  .navbar-nav {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .nav-item {
+    margin-bottom: 10px;
+  }
+
+  .nav-item button {
+    width: 100%;
+  }
+
+  .navbar-toggler {
+    margin: auto;
+  }
+
+  .navbar-brand {
+    text-align: center;
+    width: 100%;
+    font-size: 1.2rem;
+  }
+
+  .collapse.show {
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+  }
+}
