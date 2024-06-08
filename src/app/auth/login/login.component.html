@@ -1,14 +1,26 @@
-<div>
-  <h2>Login</h2>
+<div class="container mt-5">
   <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-    <mat-form-field>
-      <mat-label>Email</mat-label>
-      <input matInput formControlName="email">
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Password</mat-label>
-      <input matInput type="password" formControlName="password">
-    </mat-form-field>
-    <button mat-raised-button color="primary" type="submit">Login</button>
+    <div class="form-group input-width">
+      <label for="email">Email</label>
+      <input type="email" id="email" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+      <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+        <div *ngIf="f.email.errors.required">Email is required</div>
+        <div *ngIf="f.email.errors.email">Email must be valid</div>
+      </div>
+    </div>
+
+    <div class="form-group input-width">
+      <label for="password">Password</label>
+      <input type="password" id="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
+      <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+        <div *ngIf="f.password.errors.required">Password is required</div>
+        <div *ngIf="f.password.errors.minlength">Password must be at least 3 characters</div>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Login</button>
   </form>
+  <div *ngIf="loginFailed" class="alert alert-danger mt-3">
+    Login failed. Please check your email and password.
+  </div>
 </div>

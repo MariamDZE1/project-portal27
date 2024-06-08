@@ -1,4 +1,3 @@
-
 import 'core-js/es/object';
 import 'core-js/es/function';
 import 'core-js/es/parse-int';
@@ -13,5 +12,4 @@ import 'core-js/es/map';
 import 'core-js/es/set';
 import 'core-js/es/reflect';
 import 'web-animations-js';
-import 'zone.js';  
-
+import 'zone.js';

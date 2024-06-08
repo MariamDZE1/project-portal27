@@ -1,30 +1,89 @@
-# Lesson3
+# User Management Dashboard
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.0.6.
+## Introduction
+This is a user management dashboard application built using Angular. The application includes functionalities for user registration, login, viewing user lists, and more.
 
-## Development server
+## Features
+- User registration
+- User login
+- View all users (only after login)
+- Home page with an introduction
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Table of Contents
+1. [Introduction](#introduction)
+2. [Features](#features)
+3. [Prerequisites](#prerequisites)
+4. [Application Structure](#application-structure)
+5. [Design Decisions](#design-decisions)
+6. [Technologies Used](#technologies-used)
+7. [Installation](#installation)
+8. [Setup](#setup)
+9. [Usage](#usage)
+10. [Contributing](#contributing)
+11. [License](#license)
 
-## Code scaffolding
+## Application Structure
+- `src/app/auth`: Contains components and services related to authentication (login and registration).
+- `src/app/core/services`: Contains core services such as authentication service.
+- `src/app/user`: Contains components related to user management (user list, user details).
+- `src/app/home`: Contains the home component.
+- `src/app/guards`: Contains route guards to protect routes.
+- `src/app/layout`: Contains layout components such as header and footer.
+- `src/assets`: Contains static assets such as images and styles.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Design Decisions
+- **Authentication Guard**: Used to protect routes and ensure that only authenticated users can access certain pages.
+- **Local Storage**: Used for storing user data and authentication state.
+- **Responsive Design**: The application is designed to be responsive and works well on different screen sizes.
 
-## Build
+## Technologies Used
+- Angular
+- Bootstrap
+- RxJS
+- TypeScript
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Features
+- User registration
+- User login
+- View all users (only after login)
+- Home page with an introduction
 
-## Running unit tests
+## Prerequisites
+- Node.js v14
+- Angular CLI
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Application Structure
+src/app/auth: Contains components and services related to authentication (login and registration).
+src/app/core/services: Contains core services such as authentication service.
+src/app/user: Contains components related to user management (user list, user details).
+src/app/home: Contains the home component.
+src/app/guards: Contains route guards to protect routes.
+src/app/layout: Contains layout components such as header and footer.
+src/assets: Contains static assets such as images and styles.
 
-## Running end-to-end tests
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## Installation
 
-## Further help
+### Clone the repository
+```bash
+git clone https://github.com/MariamDZE1/UserManagementDashboard.git
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
-# lesson-4
-# asfa
-# lesson-35
+# Install dependencies
+npm install
+
+# Start the application
+ng serve
+
+
+##Usage
+##Registration:
+
+Navigate to the registration page and fill in the required details to register a new user.
+Login:
+
+Use the login page to authenticate using the registered email and password.
+Use the default admin credentials (email: mariami@gmail.com, password: 1234567) for the first login.
+User Management:
+
+After logging in, navigate to the user list to view all registered users.
+Use the edit feature to modify user details and save the changes to local storage.

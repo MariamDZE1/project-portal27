@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +24,11 @@ export class AuthService {
   register(username: string, email: string, password: string): Observable<any> {
     const user = { id: Math.floor(Math.random() * 1000), username, email, password, role: 'User' };
     let storedUsers = JSON.parse(localStorage.getItem('users')) || [];
+    
+    if (storedUsers.some(u => u.email === email)) {
+      return of({ error: 'Email already exists' }).pipe(catchError(this.handleError<any>('register')));
+    }
+    
     storedUsers.push(user);
     localStorage.setItem('users', JSON.stringify(storedUsers));
     console.log('მომხმარებელი დარეგისტრირდა:', user);
@@ -49,5 +55,12 @@ export class AuthService {
 
   isLoggedIn(): boolean {
     return !!localStorage.getItem('user');
+  }
+
+  private handleError<T>(operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+      console.error(error);
+      return of(result as T);
+    };
   }
 }

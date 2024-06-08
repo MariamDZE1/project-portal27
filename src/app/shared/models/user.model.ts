@@ -7,4 +7,7 @@ export interface User {
   role: string;
   showPassword?: boolean;
   isEditing?: boolean;
+  editableUsername?: string;
+  editableEmail?: string;
+  editablePassword?: string;
 }

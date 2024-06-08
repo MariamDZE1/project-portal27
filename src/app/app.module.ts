@@ -3,8 +3,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router'; 
+import { ToastrModule } from 'ngx-toastr';
+import { MatIconModule } from '@angular/material/icon';
 import { MaterialModule } from './material.module';
+import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
+import { BidiModule } from '@angular/cdk/bidi';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -20,6 +24,14 @@ import { UserService } from './core/services/user.service';
 import { UserSharedService } from './core/services/user-shared.service';
 import { AuthGuard } from './guards/auth.guard';
 import { AdminGuard } from './guards/admin.guard';
+import { HomeComponent } from './home/home.component';
+
+const routes: Routes = [
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'users', component: UserListComponent },
+  
+];
 
 @NgModule({
   declarations: [
@@ -29,7 +41,8 @@ import { AdminGuard } from './guards/admin.guard';
     UserListComponent,
     UserDetailComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -38,10 +51,21 @@ import { AdminGuard } from './guards/admin.guard';
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
-    RouterModule,
-    MaterialModule
+    RouterModule.forRoot(routes), 
+    MaterialModule,
+    ToastrModule.forRoot(),
+    MatIconModule,
+    MatNativeDateModule,
+    BidiModule
   ],
-  providers: [AuthService, UserService, UserSharedService, AuthGuard, AdminGuard],
+  providers: [
+    AuthService,
+    UserService,
+    UserSharedService,
+    AuthGuard,
+    AdminGuard,
+    { provide: MAT_DATE_LOCALE, useValue: 'en-GB' }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

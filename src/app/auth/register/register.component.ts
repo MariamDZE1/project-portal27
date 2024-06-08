@@ -12,7 +12,8 @@ import { User } from '../../shared/models/user.model';
 })
 export class RegisterComponent {
   registerForm: FormGroup;
-  registrationSuccess: boolean = false;
+  submitted = false;
+  registrationSuccess = false;
 
   constructor(
     private fb: FormBuilder,
@@ -23,16 +24,22 @@ export class RegisterComponent {
     this.registerForm = this.fb.group({
       username: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required]
+      password: ['', [Validators.required, Validators.minLength(3)]]
     });
   }
 
+  get f() {
+    return this.registerForm.controls;
+  }
+
   onSubmit(): void {
+    this.submitted = true;
+
     if (this.registerForm.valid) {
       const { username, email, password } = this.registerForm.value;
       const users = JSON.parse(localStorage.getItem('users')) || [];
       const newUser: User = { id: users.length + 1, username, email, password, role: 'User' };
-      
+
       users.push(newUser);
       localStorage.setItem('users', JSON.stringify(users));
 
@@ -40,7 +47,7 @@ export class RegisterComponent {
         this.userSharedService.addUser(newUser);
         this.registrationSuccess = true;
         setTimeout(() => {
-          this.router.navigate(['/login']);
+          this.router.navigate(['/users']);
         }, 2000);
       }, error => {
         console.error('Registration failed', error);

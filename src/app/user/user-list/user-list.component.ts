@@ -17,9 +17,14 @@ export class UserListComponent implements OnInit {
   constructor(private userSharedService: UserSharedService) {}
 
   ngOnInit(): void {
-    const storedUsers = JSON.parse(localStorage.getItem('users')) || [];
-    this.userSharedService.setUsers(storedUsers);
-    
+    const currentUser = JSON.parse(localStorage.getItem('user'));
+    if (currentUser) {
+      const storedUsers = JSON.parse(localStorage.getItem('users')) || [];
+      this.userSharedService.setUsers(storedUsers);
+    } else {
+      this.userSharedService.setUsers([]);
+    }
+
     this.userSharedService.users$.subscribe(users => {
       this.users = users;
       this.isLoading = false;
@@ -32,9 +37,17 @@ export class UserListComponent implements OnInit {
 
   editUser(user: User): void {
     user.isEditing = true;
+    user.editableUsername = user.username;
+    user.editableEmail = user.email;
+    user.editablePassword = user.password;
   }
 
   saveChanges(user: User): void {
+    if (user.editableUsername && user.editableEmail && user.editablePassword) {
+      user.username = user.editableUsername;
+      user.email = user.editableEmail;
+      user.password = user.editablePassword;
+    }
     user.isEditing = false;
     this.userSharedService.updateUser(user).subscribe(() => {
       const users = JSON.parse(localStorage.getItem('users')) || [];

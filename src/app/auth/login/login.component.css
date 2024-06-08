@@ -1,0 +1,16 @@
+.container {
+  margin-top: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.input-width {
+  max-width: 300px;
+  margin: auto; 
+}
+
+.btn-block {
+  width: 100%;
+}

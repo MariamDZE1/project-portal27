@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { User } from '../../shared/models/user.model';
+import { User } from '../../shared/models/user.model'; 
 
 @Injectable({
   providedIn: 'root'
@@ -10,21 +9,13 @@ import { User } from '../../shared/models/user.model';
 export class UserService {
   private apiUrl = 'https://jsonplaceholder.typicode.com/users';
 
-  constructor(private http: HttpClient) {}
+  constructor() {}
 
   getUsers(): Observable<User[]> {
-    return this.http.get<User[]>(this.apiUrl)
-      .pipe(catchError(this.handleError<User[]>('getUsers', [])));
-  }
-
-  getUser(id: number): Observable<User> {
-    return this.http.get<User>(`${this.apiUrl}/${id}`)
-      .pipe(catchError(this.handleError<User>('getUser')));
-  }
-
-  updateUser(user: User): Observable<any> {
-    return this.http.put(`${this.apiUrl}/${user.id}`, user)
-      .pipe(catchError(this.handleError<any>('updateUser')));
+    const storedUsers = JSON.parse(localStorage.getItem('users')) || [];
+    const loggedInUser = JSON.parse(localStorage.getItem('currentUser'));
+    const usersToShow = loggedInUser ? storedUsers.filter(user => user.email !== loggedInUser.email) : [];
+    return of(usersToShow).pipe(catchError(this.handleError<User[]>('getUsers', [])));
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

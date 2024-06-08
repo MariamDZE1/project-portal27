@@ -1,0 +1,19 @@
+.container {
+    margin-top: 100px;
+  }
+  
+  h1 {
+    font-size: 2.5rem;
+    color: #007bff;
+  }
+  
+  .lead {
+    font-size: 1.5rem;
+    color: #6c757d;
+  }
+  
+  p {
+    font-size: 1.25rem;
+    color: #343a40;
+  }
+  

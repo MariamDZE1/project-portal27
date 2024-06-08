@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from './core/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -8,8 +10,13 @@ import { Component, OnInit } from '@angular/core';
 export class AppComponent implements OnInit {
   title = 'User Management Dashboard';
 
+  constructor(private authService: AuthService, private router: Router) {}
+
   ngOnInit(): void {
     this.setDefaultAdminUser();
+    if (!this.authService.isLoggedIn()) {
+      this.router.navigate(['/login']);
+    }
   }
 
   setDefaultAdminUser(): void {
@@ -28,5 +35,9 @@ export class AppComponent implements OnInit {
       storedUsers.push(defaultAdmin);
       localStorage.setItem('users', JSON.stringify(storedUsers));
     }
+  }
+
+  isLoggedIn(): boolean {
+    return this.authService.isLoggedIn();
   }
 }

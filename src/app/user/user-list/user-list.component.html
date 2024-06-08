@@ -1,40 +1,38 @@
-<div class="container mt-4">
-  <div class="table-responsive">
-    <table class="table table-striped table-hover">
-      <thead class="thead-dark">
-        <tr>
-          <th scope="col">ID</th>
-          <th scope="col">Username</th>
-          <th scope="col">Email</th>
-          <th scope="col">Password</th>
-          <th scope="col">Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let user of users">
-          <td>{{ user.id }}</td>
-          <td>
-            <input matInput [(ngModel)]="user.username" [readonly]="!user.isEditing" class="form-control">
-          </td>
-          <td>
-            <input matInput [(ngModel)]="user.email" [readonly]="!user.isEditing" class="form-control">
-          </td>
-          <td>
-            <input matInput [(ngModel)]="user.password" [type]="user.showPassword ? 'text' : 'password'" [readonly]="!user.isEditing" class="form-control">
-          </td>
-          <td>
-            <button mat-button color="primary" class="btn btn-sm btn-outline-primary" (click)="editUser(user)">
-              <mat-icon></mat-icon> Edit
-            </button>
-            <button mat-button color="primary" class="btn btn-sm btn-outline-secondary" (click)="togglePasswordVisibility(user)">
-              <mat-icon></mat-icon> View
-            </button>
-            <button mat-button color="primary" class="btn btn-lg btn-outline-success" (click)="saveChanges(user)" *ngIf="user.isEditing">
-              <mat-icon></mat-icon> Save
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+<div class="container mt-5">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Password</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <td>{{ user.id }}</td>
+        <td>
+          <span *ngIf="!user.isEditing">{{ user.username }}</span>
+          <input *ngIf="user.isEditing" [(ngModel)]="user.editableUsername" class="form-control">
+        </td>
+        <td>
+          <span *ngIf="!user.isEditing">{{ user.email }}</span>
+          <input *ngIf="user.isEditing" [(ngModel)]="user.editableEmail" class="form-control">
+        </td>
+        <td>
+          <span *ngIf="user.showPassword">{{ user.password }}</span>
+          <span *ngIf="!user.showPassword">******</span>
+          <button class="btn btn-sm btn-outline-secondary" (click)="togglePasswordVisibility(user)">
+            {{ user.showPassword ? 'Hide' : 'Show' }}
+          </button>
+          <input *ngIf="user.isEditing" [(ngModel)]="user.editablePassword" class="form-control mt-1">
+        </td>
+        <td>
+          <button class="btn btn-sm btn-primary" (click)="editUser(user)" *ngIf="!user.isEditing">Edit</button>
+          <button class="btn btn-sm btn-success" (click)="saveChanges(user)" *ngIf="user.isEditing">Save</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>
